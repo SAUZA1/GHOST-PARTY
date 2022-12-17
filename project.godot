@@ -8,10 +8,20 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "RichTextEffect",
+"class": "RichTextGhost",
+"language": "GDScript",
+"path": "res://SCRIPTS/RichTextGhost.gd"
+} ]
+_global_script_class_icons={
+"RichTextGhost": ""
+}
+
 [application]
 
 config/name="Ghost Party"
-run/main_scene="res://menu.tscn"
+run/main_scene="res://Menus/StartMenu.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -52,10 +62,10 @@ move_down={
  ]
 }
 
+[mono]
+
+project/assembly_name="Ghost Party"
+
 [physics]
 
 common/enable_pause_aware_picking=true
-
-[rendering]
-
-quality/driver/driver_name="GLES2"
