@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ScaryMusicNopeModified.mp3-a981ef13b6643312c6cef144b4460eca.mp3str"
+
+[deps]
+
+source_file="res://SFX/ScaryMusicNopeModified.mp3"
+dest_files=[ "res://.import/ScaryMusicNopeModified.mp3-a981ef13b6643312c6cef144b4460eca.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

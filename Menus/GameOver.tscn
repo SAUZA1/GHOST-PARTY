@@ -1,0 +1,101 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Fonts/Impacted.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://SCRIPTS/RichTextGhost.gd" type="Script" id=2]
+[ext_resource path="res://resources/Balloon.tscn" type="PackedScene" id=3]
+[ext_resource path="res://SCRIPTS/GameOver.gd" type="Script" id=4]
+[ext_resource path="res://GFX/soundclosewhite.png" type="Texture" id=5]
+[ext_resource path="res://GFX/soundiconwhite.png" type="Texture" id=6]
+[ext_resource path="res://SFX/sad_game_over-mod.mp3" type="AudioStream" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 256
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 128
+font_data = ExtResource( 1 )
+
+[sub_resource type="RichTextEffect" id=3]
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+margin_left = 384.0
+margin_top = 91.0
+margin_right = 1572.0
+margin_bottom = 473.0
+custom_colors/default_color = Color( 0.956863, 0.0313726, 0.0313726, 1 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[wave]GAME OVER[/wave]"
+text = "GAME OVER"
+scroll_active = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Control"]
+margin_left = 707.0
+margin_top = 481.0
+margin_right = 1155.0
+margin_bottom = 649.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "RESTART"
+text = "RESTART"
+scroll_active = false
+custom_effects = [ SubResource( 3 ) ]
+
+[node name="Balloon" parent="Control" instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 595, 582 )
+scale = Vector2( 0.2, 0.2 )
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Control"]
+margin_left = 707.0
+margin_top = 676.0
+margin_right = 1155.0
+margin_bottom = 844.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "QUIT"
+text = "QUIT"
+scroll_active = false
+custom_effects = [ SubResource( 3 ) ]
+
+[node name="Balloon2" parent="Control" instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 595, 782 )
+scale = Vector2( 0.2, 0.2 )
+
+[node name="Button" type="TextureButton" parent="Control"]
+margin_left = 1519.0
+margin_top = 654.0
+margin_right = 2031.0
+margin_bottom = 1166.0
+rect_scale = Vector2( 0.35, 0.35 )
+toggle_mode = true
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -29.714
+autoplay = true
+
+[connection signal="gui_input" from="Control/RichTextLabel2" to="." method="_on_RichTextLabel2_gui_input"]
+[connection signal="mouse_entered" from="Control/RichTextLabel2" to="." method="_on_RichTextLabel2_mouse_entered"]
+[connection signal="mouse_exited" from="Control/RichTextLabel2" to="." method="_on_RichTextLabel2_mouse_exited"]
+[connection signal="gui_input" from="Control/RichTextLabel3" to="." method="_on_RichTextLabel3_gui_input"]
+[connection signal="mouse_entered" from="Control/RichTextLabel3" to="." method="_on_RichTextLabel3_mouse_entered"]
+[connection signal="mouse_exited" from="Control/RichTextLabel3" to="." method="_on_RichTextLabel3_mouse_exited"]
+[connection signal="pressed" from="Control/Button" to="." method="_on_Button_pressed"]

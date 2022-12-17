@@ -1,0 +1,214 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://Fonts/Impacted.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://SCRIPTS/RichTextGhost.gd" type="Script" id=2]
+[ext_resource path="res://GFX/MenuBackgroundDefault.png" type="Texture" id=3]
+[ext_resource path="res://GFX/MenuBackgroundEvil.png" type="Texture" id=4]
+[ext_resource path="res://GFX/soundiconwhite.png" type="Texture" id=5]
+[ext_resource path="res://GFX/soundclosewhite.png" type="Texture" id=6]
+[ext_resource path="res://Particles/circle_05.png" type="Texture" id=7]
+[ext_resource path="res://resources/Balloon.tscn" type="PackedScene" id=8]
+[ext_resource path="res://SFX/ScaryMusicNope.mp3" type="AudioStream" id=9]
+[ext_resource path="res://SCRIPTS/StartMenu.gd" type="Script" id=10]
+[ext_resource path="res://Effects/Lightning.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Effects/Cloud.tscn" type="PackedScene" id=12]
+
+[sub_resource type="SpriteFrames" id=18]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Angry",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Normal",
+"speed": 5.0
+} ]
+
+[sub_resource type="AnimatedTexture" id=8]
+frames = 2
+frame_0/texture = ExtResource( 3 )
+frame_1/texture = ExtResource( 4 )
+frame_1/delay_sec = 0.0
+
+[sub_resource type="DynamicFont" id=2]
+size = 128
+font_data = ExtResource( 1 )
+
+[sub_resource type="RichTextEffect" id=3]
+script = ExtResource( 2 )
+
+[sub_resource type="CanvasItemMaterial" id=9]
+blend_mode = 1
+
+[sub_resource type="Curve" id=10]
+_data = [ Vector2( 0.00561798, 0.00340903 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 10 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+scale_curve = SubResource( 11 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="RichTextEffect" id=17]
+script = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="RichTextEffect" id=15]
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource( 10 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 964, 630 )
+frames = SubResource( 18 )
+animation = "Normal"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 94.0
+margin_bottom = 94.0
+texture = SubResource( 8 )
+expand = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 594.0
+margin_top = 548.0
+margin_right = 1291.0
+margin_bottom = 721.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[shake rate=5 level=15]GHOST PARTY[/shake]"
+text = "GHOST PARTY"
+scroll_active = false
+custom_effects = [ SubResource( 3 ) ]
+
+[node name="Lightning" parent="." instance=ExtResource( 11 )]
+visible = false
+
+[node name="Lightning2" parent="." instance=ExtResource( 11 )]
+visible = false
+position = Vector2( 480, 354 )
+
+[node name="Lightning3" parent="." instance=ExtResource( 11 )]
+visible = false
+position = Vector2( 1425, 362 )
+
+[node name="Lightning4" parent="." instance=ExtResource( 11 )]
+visible = false
+position = Vector2( 1775, 389 )
+
+[node name="Cloud" parent="." instance=ExtResource( 12 )]
+position = Vector2( 141, 85 )
+
+[node name="Cloud2" parent="." instance=ExtResource( 12 )]
+position = Vector2( 400, 96 )
+
+[node name="Cloud3" parent="." instance=ExtResource( 12 )]
+position = Vector2( 606, 98 )
+
+[node name="Cloud4" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1362, 111 )
+
+[node name="Cloud5" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1584, 130 )
+
+[node name="Cloud6" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1784, 130 )
+
+[node name="Flash" type="Particles2D" parent="."]
+visible = false
+material = SubResource( 9 )
+position = Vector2( 314, 98 )
+amount = 1
+explosiveness = 1.0
+process_material = SubResource( 12 )
+texture = ExtResource( 7 )
+
+[node name="Control" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="RichTextLabel" parent="Control"]
+margin_left = 782.0
+margin_top = 764.0
+margin_right = 1048.0
+margin_bottom = 861.0
+mouse_default_cursor_shape = 2
+custom_fonts/normal_font = SubResource( 16 )
+bbcode_enabled = true
+bbcode_text = "NEW GAME"
+text = "NEW GAME"
+scroll_active = false
+custom_effects = [ SubResource( 17 ) ]
+
+[node name="Balloon" parent="Control" instance=ExtResource( 8 )]
+visible = false
+position = Vector2( 695, 817 )
+scale = Vector2( 0.2, 0.2 )
+frame = 1
+
+[node name="Label2" type="RichTextLabel" parent="Control"]
+margin_left = 782.2
+margin_top = 921.0
+margin_right = 1048.2
+margin_bottom = 1018.0
+mouse_default_cursor_shape = 2
+custom_fonts/normal_font = SubResource( 14 )
+bbcode_enabled = true
+bbcode_text = "QUIT"
+text = "QUIT"
+scroll_active = false
+custom_effects = [ SubResource( 15 ) ]
+
+[node name="Balloon2" parent="Control" instance=ExtResource( 8 )]
+visible = false
+position = Vector2( 695.2, 974 )
+scale = Vector2( 0.2, 0.2 )
+frame = 1
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -12.246
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="TextureButton" type="TextureButton" parent="."]
+visible = false
+margin_left = 1591.0
+margin_top = 748.0
+margin_right = 2103.0
+margin_bottom = 1260.0
+rect_scale = Vector2( 0.35, 0.35 )
+toggle_mode = true
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
+
+[connection signal="gui_input" from="Control/Label" to="." method="_on_Label_gui_input"]
+[connection signal="mouse_entered" from="Control/Label" to="." method="_on_Label_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Label" to="." method="_on_Label_mouse_exited"]
+[connection signal="gui_input" from="Control/Label2" to="." method="_on_Label2_gui_input"]
+[connection signal="mouse_entered" from="Control/Label2" to="." method="_on_Label2_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Label2" to="." method="_on_Label2_mouse_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
